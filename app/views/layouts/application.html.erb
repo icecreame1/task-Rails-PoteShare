@@ -1,20 +1,94 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Poteshareapp</title>
+    <title>Poteshare</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if flash[:notice] %>
+      <div class="notification is-primary mb-0">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="notification is-warning mb-0"></div>
+        <p class="alert"><%= alert %></p>
+    <% end %>
+
+    <nav class="navbar is-small is-black p-2" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a href="/" class="navbar-item">
+          <img src="https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png" alt="サイトのロゴ画像">
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="top-menu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+
+      <div class="navbar-menu" id="top-menu" >
+        <div class="navbar-start">
+          <%= search_form_for @q, url: search_rooms_path, class: "navbar-item pr-0" do |f| %>
+            <%= f.search_field :address_cont, placeholder: "エリア" %>
+          <% end %>
+          <%= search_form_for @q, url: search_rooms_path, class: "navbar-item" do |f| %>
+            <%= f.search_field :room_name_or_address_or_room_introduction_cont, placeholder: "キーワード" %>
+          <% end %>
+        </div>
+      </div>
+
+      <% if user_signed_in? %>
+      <div class="navber-end my-auto">
+        <div class="navbar-item" id="list">
+          <div class="field is-grouped">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <p class="navbar-link mx-2"><%= current_user.user_name %></p>
+              <ul class="navbar-dropdown p-2 mt-1">
+                <a><li class="navbar-item p-2"><%= link_to "ルーム登録", new_room_path %></li></a>
+                <a><li class="navbar-item p-2"><%= link_to "ルーム一覧", rooms_path %></li></a>
+                <a><li class="navbar-item p-2"><%= link_to "予約済みルーム一覧", reservations_path %></li></a>
+                <a><li class="navbar-item p-2"><%= link_to "マイページ", user_path(current_user.id) %></li></a>
+                <a><li class="navbar-item p-2"><%= link_to "ログアウト", destroy_user_session_path, method: :delete	%></li></a>
+              </ul>
+            </div>
+            <figure class="image">
+              <%= attachment_image_tag @user, :user_image, fallback: "default_icon.jpeg", class:"image is-48x48" %>
+            </figure>
+          </div>
+        </div>
+      <% else %>
+      <div class="navbar-end is-align-items-center mr-5">
+        <div class="barvar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <%= link_to "ログイン", new_user_session_path, class: "button is-link is-link"	%>
+            </p>
+            <p class="control">
+              <%= link_to "新規登録", new_user_registration_path, class: "button is-light is-grey" %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </nav>
 
     <%= yield %>
+
+    <footer class="footer has-background-black has-text-white">
+      <div class="content has-text-centered">
+        <p>© 2020 POTEPAN.INC.</p>
+      </div>
+    </footer>
 
   </body>
 </html>

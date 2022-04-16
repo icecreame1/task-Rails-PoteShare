@@ -1,0 +1,23 @@
+// Place all the styles related to the reservations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+td {
+  vertical-align: middle!important;
+  text-align: center!important;
+}
+
+#content-border {
+  border-bottom: solid 1px #eaedef;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+#submit {
+  width: 95%;
+}
+
+#reservation-field {
+  width: 95%;
+  height: 30px;
+}

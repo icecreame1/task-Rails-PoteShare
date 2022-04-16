@@ -1,0 +1,33 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.hero {
+  background-size: cover;
+  background-position: center;
+}
+
+.box {
+  max-width: 500px;
+  padding: 20px;
+}
+
+#top-search {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: solid 1px gray;
+}
+
+#top-submit {
+  width: 100%;
+  height: 30px;
+  background-color: #4a90e2;
+  border-radius: 6px;
+  border: solid 1px gray;
+}
+
+.picture {
+  border-radius: 10px;
+}

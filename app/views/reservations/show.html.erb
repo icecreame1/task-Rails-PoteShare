@@ -1,0 +1,28 @@
+<div class="box mx-auto mt-6">
+  <h1 class="title is-4">予約完了</h1>
+
+  <table class="table is-striped mx-auto" style="width: 100%;">
+    <tr>
+      <th>予約したお部屋</th>
+      <td class="has-text-left"><%= @reservation.room.room_name %></td>
+    </tr>
+    <tr>
+      <th>開始日</th>
+      <td class="has-text-left"><%= @reservation.check_in.to_s(:datetime_jp) %></td>
+    </tr>
+    <tr>
+      <th>終了日</th>
+      <td class="has-text-left"><%= @reservation.check_out.to_s(:datetime_jp) %></td>
+    </tr>
+    <tr>
+      <th>金額</th>
+      <td class="has-text-left"><%= @reservation.total_price %>円</td>
+    </tr>
+  </table>
+
+  <div>
+    <ul>
+      <li><%= link_to "予約一覧に戻る", reservations_path, class:"button is-link px-6 mt-3" %></li>
+    </ul>
+  </div>
+</div>
