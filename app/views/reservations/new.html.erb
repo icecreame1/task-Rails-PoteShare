@@ -1,0 +1,56 @@
+<div class="box mx-auto mt-6">
+  <h1 class="title is-4" id="content-border">予約内容確認</h1>
+
+  <%= render "shared/error", obj:@reservation %>
+
+  <div class="field">
+    <div class="label">
+      <p>¥<span><%= @reservation.room.price %></span>/日</p>
+    </div>
+  </div>
+
+  <%= form_with model: @reservation do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <div class="field">
+      <div class="label">
+        <%= f.label :check_in, "開始日" %>
+      </div>
+        <%= f.date_field :check_in, :readonly => true, id:"reservation-field" %>
+    </div>
+
+    <div class="field">
+      <div class="label">
+        <%= f.label :check_out, "終了日" %>
+      </div>
+        <%= f.date_field :check_out, :readonly => true, id:"reservation-field" %>
+    </div>
+
+    <div class="field" id="content-border">
+      <div class="label">
+        <p>使用日数 : <%= @reservation.total_day %> 日</p>
+      </div>
+    </div>
+
+    <div class="field" id="content-border">
+      <div class="label">
+        <%= f.label :check_out, "人数（人）" %>
+      </div>
+        <%= f.number_field :people, :readonly => true, id:"reservation-field" %>
+    </div>
+
+    <div class="field">
+      <div class="label">
+        <%= f.label :total_price, "合計金額（円）" %>
+      </div>
+        <%= f.number_field :total_price, :readonly => true, id:"reservation-field" %>
+    </div>
+
+    <p class="mt-4 is-size-7" id="content-border">上記内容で宜しければ「予約確定」を押して下さい</p>
+
+    <div class="mb-3">
+      <%= f.submit "予約確定", class:"button is-link px-6 mt-3", id:"submit" %><br>
+      <%= f.submit "戻る", name: :back, class:"button has-background-grey has-text-white px-6 mt-3", id:"submit" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,10 @@
+  <div class="tile is-parent is-2">
+      <div class="tile is-child notification is-primary">
+        <p class="menu-label is-hidden-touch has-text-black">メニュー</p>
+          <ul class="menu-list">
+            <li class="mb-2"><%= link_to "アカウント", user_path(@user) %></li>
+            <li class="mb-2"><%= link_to "プロフィール", edit_user_path(@user) %></li>
+            <li class="mb-2"><%= link_to "登録済みルーム一覧", myindex_rooms_path(current_user.id)	%></li>
+          </ul>
+      </div>
+    </div>

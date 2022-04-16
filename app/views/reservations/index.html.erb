@@ -1,0 +1,33 @@
+<h1 class="title is-4 m-6">予約済みルーム一覧</h1>
+
+<table class="table is-striped m-6">
+  <thead class="has-text-centered">
+    <tr>
+      <th>ルーム画像</th>
+      <th>ルーム名</th>
+      <th>ルーム紹介</th>
+      <th>合計金額</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>予約確定日時</th>
+      <th>予約キャンセル</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= attachment_image_tag reservation.room, :room_image, size: "240x120" %></td>
+        <td class="is-underlined has-text-weight-bold"><%= link_to reservation.room.room_name, room_path(reservation.room_id) %></td>
+        <td><%= reservation.room.room_introduction %></td>
+        <td><%= reservation.total_price %>円</td>
+        <td><%= reservation.check_in.to_s(:datetime_jp) %></td>
+        <td><%= reservation.check_out.to_s(:datetime_jp) %></td>
+        <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+        <% if reservation.user_id == current_user.id %>
+          <td class="has-text-weight-bold"><%= link_to "キャンセル", reservation, method: :delete, data: { confirm: "本当にキャンセルしますか?" }, class:"has-text-danger" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

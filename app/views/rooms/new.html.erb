@@ -1,0 +1,51 @@
+<div clas="tile is-ancestor" id="tile">
+  <div class="tile">
+    <div class="tile is-parent is-2">
+      <div class="tile is-child notification is-primary">
+        <p class="menu-label is-hidden-touch has-text-black">メニュー</p>
+          <ul class="menu-list">
+            <li class="mb-2"><%= link_to "基本情報", new_room_path %></li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="tile is-parent is-8">
+      <div class="tile is-child notification">
+        <h1 class="title is-4">ルーム情報登録</h1>
+
+        <%= render "shared/error", obj: @room %>
+
+        <%= form_with model: @room do |f| %>
+          <div class="field is-horizontal">
+            <table>
+              <tr>
+                <th class="label"><%= f.label :room_name, "ルーム名" %><span class="tag is-danger ml-3">必須</span></th>
+                <th class="field"><%= f.text_field :room_name, placeholder: "ルーム名を入力して下さい", class:"input mb-3", type:"text" %></th>
+              </tr>
+              <tr>
+                <th class="label"><%= f.label :room_introduction, "ルーム紹介" %><span class="tag is-danger ml-3">必須</span></th>
+                <th><%= f.text_area :room_introduction, placeholder: "ルーム説明を入力して下さい", class:"textarea mb-3" %></th>
+              </tr>
+              <tr>
+                <th class="label"><%= f.label :price, "料金" %><span class="tag is-danger ml-3">必須</span></th>
+                <th><%= f.text_field :price, placeholder: "1日あたりの料金を入力して下さい", class:"input mb-3", type:"text" %></th>
+              </tr>
+              <tr>
+                <th class="label"><%= f.label :address, "住所" %><span class="tag is-danger ml-3">必須</span></th>
+                <th><%= f.text_field :address, placeholder: "を住所を入力して下さい", class:"input mb-3", type:"text" %></th>
+              </tr>
+              <tr>
+                <th class="label mr-6"><%= f.label :room_image, "ルーム画像 "%><span class="tag is-danger ml-3">必須</span></th>
+                <th><%= f.attachment_field :room_image, class:"file mb-3" %></th>
+              </tr>
+            </table>
+          </div>
+          <ul>
+            <li><%= f.submit "登録" ,class:"button is-link mr-3" %></li>
+          </ul>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

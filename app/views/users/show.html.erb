@@ -1,0 +1,37 @@
+<div clas="tile is-ancestor" id="tile">
+  <div class="tile">
+
+    <%= render "shared/side" %>
+
+    <div class="tile is-parent is-8">
+      <div class="tile is-child notification">
+        <h1 class="title is-4">アカウント</h1>
+
+        <div class="field is-horizontal">
+          <table>
+            <tr>
+              <th class="label">名前</th>
+              <td class="field has-text-left"><%= @user.user_name %></td>
+            </tr>
+            <tr>
+              <th class="label mr-6">メールアドレス</th>
+              <td class="field has-text-left"><%= @user.email %></td>
+            </tr>
+            <tr>
+              <th class="label">パスワード</th>
+              <td class="field has-text-left">*********</td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <ul class="buttons">
+            <li class="button is-link"><%= link_to "編集", edit_user_registration_path %></li>
+            <li class="button"><%= link_to "ホームへ戻る", root_path %></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

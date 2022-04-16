@@ -1,0 +1,25 @@
+<h1 class="title is-4 m-6">ルーム一覧</h1>
+
+<table class="table is-striped m-6">
+  <thead class="has-text-centered">
+    <tr>
+      <th>ルーム画像</th>
+      <th>ルーム名</th>
+      <th>ルーム紹介</th>
+      <th>料金</th>
+      <th>作成日</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><%= attachment_image_tag room, :room_image, size: "240x120" %></td>
+        <td class="is-underlined has-text-weight-bold"><%= link_to room.room_name, room_path(room) %></td>
+        <td><%= room.room_introduction %></td>
+        <td><%= room.price %>円</td>
+        <td><%= room.created_at.to_s(:datetime_jp) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

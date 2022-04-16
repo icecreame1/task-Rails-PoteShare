@@ -1,0 +1,34 @@
+<h1 class="title is-4 m-6">検索結果 : <%= @rooms.count %> 件</h1>
+
+<div class="columns is-multiline m-6">
+  <% if @rooms.present? %>
+    <% @rooms.each do |room| %>
+      <div class="column is-3">
+        <div class="card">
+
+          <div class="card-image">
+            <%= link_to room_path(room) do %>
+              <%= attachment_image_tag room, :room_image, size: "413x180" %>
+            <% end %>
+          </div>
+
+          <div class="card-content p-4">
+            <div class="content mb-3 has-text-weight-bold">
+              <%= link_to room.room_name, room_path(room) %>
+            </div>
+            <div class="content mb-3 has-text-weight-bold">
+              <%= link_to room.address, room_path(room), class:"has-text-black" %>
+            </div>
+            <div class="content has-text-right">
+              <p>¥<%= link_to room.price, room_path(room), class:"has-text-black" %>-</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>検索結果が有りませんでした</p>
+  <% end %>
+
+</div>

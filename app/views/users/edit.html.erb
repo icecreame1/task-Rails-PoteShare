@@ -1,0 +1,43 @@
+<div clas="tile is-ancestor" id="tile">
+  <div class="tile">
+
+    <%= render "shared/side" %>
+
+    <div class="tile is-parent is-8">
+      <div class="tile is-child notification">
+        <h1 class="title is-4">プロフィール</h1>
+        <%= form_with model:@user do |f| %>
+
+          <div class="field is-horizontal">
+            <table>
+              <figure class="image">
+                <th><%= attachment_image_tag @user, :user_image, fallback: "default_icon.jpeg", class:"image is-48x48 mb-3 ml-5"%></th>
+              </figure>
+
+              <tr>
+                <th class="label mr-6">アイコン画像<span class="tag is-danger ml-3">必須</span></th>
+                <td class="field"><%= f.attachment_field :user_image, class:"file mb-3" %></td>
+              </tr>
+              <tr>
+                <th class="label">名前<span class="tag is-danger ml-3">必須</span></th>
+                <td class="field"><%= f.text_field :user_name, class:"input mb-3", type:"text" %></td>
+              </tr>
+              <tr>
+                <th class="label">自己紹介<span class="tag is-danger ml-3">必須</span></th>
+                <td class="field"><%= f.text_area :user_introduction, class:"textarea mb-3"%></td>
+              </tr>
+            </table>
+          </div>
+
+          <div>
+            <ul class="buttons">
+              <li><%= f.submit "更新", class:"button is-link mr-3" %></li>
+              <li class="button"><%= link_to "ホームへ戻る", root_path %></li>
+            </ul>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

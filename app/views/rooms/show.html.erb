@@ -1,0 +1,69 @@
+<%= render "shared/error", obj:@reservation %>
+
+<h1 class="title is-4 m-6">ルーム情報詳細</h1>
+
+<div class="columns is-centered m-6">
+  <div class="column is-7">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-2by1">
+          <%= attachment_image_tag @room, :room_image %></p>
+        </figure>
+      </div>
+
+      <div class="card-content">
+        <div class="media">
+          <figure class="media-left mr-5 my-auto">
+            <p><%= attachment_image_tag current_user, :user_image, fallback: "default_icon.jpeg", class:"image is-48x48" %></p>
+          </figure>
+          <div class="medlia-content">
+            <p class="has-text-weight-bold is-size-4"><%= @room.room_name %></p>
+            <p class="mt-3"><%= @room.address %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer py-6 pl-5">
+        <p><%= @room.room_introduction %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box mt-3 mx-4 p-6" style="width:100%">
+    <p class="is-size-4 mb-3">¥<span><%= @room.price %></span>/日</p>
+
+    <%= form_with model: @reservation, url: new_reservation_path, local: true do |f| %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+
+      <div class="field">
+        <div class="label">
+          <%= f.label :check_in,"開始日" %>
+        </div>
+          <%= f.date_field :check_in, id:"field" %>
+      </div>
+
+      <div class="field">
+        <div class="label">
+          <%= f.label :check_out,"終了日" %>
+        </div>
+          <%= f.date_field :check_out, id:"field" %>
+      </div>
+
+      <div class="field">
+        <div class="label">
+          <%= f.label :people,"人数" %>
+        </div>
+        <%= f.text_field :people, id:"field" %>
+      </div>
+
+      <div class="has-text-centered">
+        <% if user_signed_in? %>
+          <%= f.submit "予約する", class:"button is-link px-6 mt-3" %>
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path, class:"button is-link px-6 mt-3" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
